@@ -5,7 +5,7 @@ class Pulseview < Formula
     sha256 "f042f77a3e1b35bf30666330e36ec38fab8d248c3693c37b7e35d401c3bfabcb"
     head "git://sigrok.org/pulseview"
   
-    depends_on "qt@5"
+    depends_on "qt"
     depends_on "cmake" => :build
     depends_on "pkg-config" => :build
     depends_on "glib" => :build
