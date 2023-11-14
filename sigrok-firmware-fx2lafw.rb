@@ -11,6 +11,7 @@ class SigrokFirmwareFx2lafw < Formula
   depends_on "sdcc" => :build
 
   def install
+    system "perl", "-i", "-pe", "s#(__sbit\s+__at)\s+(0x\d+\s*\+\s*\d)\s+#\1(\2) #", "fx2lib/include/fx2regs.h"
     system "./configure", "--prefix=#{prefix}"
     system "make"
     system "make", "install"
