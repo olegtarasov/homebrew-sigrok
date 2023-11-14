@@ -9,8 +9,8 @@ class SigrokCli < Formula
   depends_on "glib" => :build
   depends_on "make" => :build
   depends_on "pkg-config" => :build
-  depends_on "tnishinaga/sigrok/libsigrok"
-  depends_on "tnishinaga/sigrok/libsigrokdecode"
+  depends_on "takesako/sigrok/libsigrok"
+  depends_on "takesako/sigrok/libsigrokdecode"
 
   def install
     system "./configure", "--prefix=#{prefix}"
