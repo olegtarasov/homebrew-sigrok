@@ -15,10 +15,10 @@ class Libsigrokdecode < Formula
   depends_on "make" => :build
   depends_on "pkg-config" => [:build, :test]
   depends_on "glib"
-  depends_on "python@3.11"
+  depends_on "python@3"
 
   def install
-    ENV["PYTHON3"] = Formula["python@3.11"].opt_bin/"python3"
+    ENV["PYTHON3"] = Formula["python@3"].opt_bin/"python3"
 
     system "sed", "-i", "-e", "s/@SRD_PKGLIBS@/python3-embed/g", "libsigrokdecode.pc.in"
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],//g', "configure.ac"
