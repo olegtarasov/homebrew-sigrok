@@ -15,18 +15,16 @@ class Pulseview < Formula
     depends_on "glibmm@2.66" => :build
     depends_on "libsigc++@2" => :build
     depends_on "libserialport" => :build
+    depends_on "hidapi" => :build
+    depends_on "nettle" => :build
     depends_on "takesako/sigrok/libsigrok" => :build
     depends_on "takesako/sigrok/libsigrokdecode"
   
     def install
-        # Qt5 requires c++11 (and the other backends do not care)
-        ENV.cxx11
-
         mkdir "build" do
-            system "cmake", "..", *std_cmake_args
+            system "cmake", "..", "-DDISABLE_WERROR=y", *std_cmake_args
             system "make"
             system "make", "install"
         end
     end
   end
-  
