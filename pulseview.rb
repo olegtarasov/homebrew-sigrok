@@ -1,6 +1,6 @@
 class Pulseview < Formula
-    desc ""
-    homepage ""
+    desc "PulseView is a Qt based logic analyzer, oscilloscope and MSO GUI for sigrok."
+    homepage "https://sigrok.org/wiki/PulseView"
     url "https://sigrok.org/download/source/pulseview/pulseview-0.4.2.tar.gz"
     sha256 "f042f77a3e1b35bf30666330e36ec38fab8d248c3693c37b7e35d401c3bfabcb"
     head "git://sigrok.org/pulseview"
