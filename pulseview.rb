@@ -17,7 +17,7 @@ class Pulseview < Formula
     depends_on "libserialport" => :build
     depends_on "hidapi" => :build
     depends_on "nettle" => :build
-    depends_on "takesako/sigrok/libsigrok" => :build
+    depends_on "takesako/sigrok/libsigrok"
     depends_on "takesako/sigrok/libsigrokdecode"
   
     def install
