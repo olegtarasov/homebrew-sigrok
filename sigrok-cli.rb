@@ -9,9 +9,11 @@ class SigrokCli < Formula
   depends_on "automake" => :build
   depends_on "autoconf" => :build
   depends_on "glib" => :build
+  depends_on "libftdi" => :build
+  depends_on "libusb" => :build
   depends_on "make" => :build
   depends_on "pkg-config" => :build
-  depends_on "takesako/sigrok/libsigrok"
+  depends_on "takesako/sigrok/libsigrok" => :build
   depends_on "takesako/sigrok/libsigrokdecode"
   depends_on "takesako/sigrok/sigrok-firmware-fx2lafw"
 
