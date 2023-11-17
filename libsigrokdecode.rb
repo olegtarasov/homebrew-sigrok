@@ -25,7 +25,7 @@ class Libsigrokdecode < Formula
     if !File.exist?("configure") && File.exist?("autogen.sh") then
       system "./autogen.sh"
     end
-    system "./configure", , *std_configure_args, "--disable-silent-rules"
+    system "./configure", *std_configure_args, "--disable-silent-rules"
     system "make", "install"
     system "make", "install", "install-decoders"
   end
