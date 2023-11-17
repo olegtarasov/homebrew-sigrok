@@ -17,10 +17,10 @@ class SigrokCli < Formula
   depends_on "takesako/sigrok/libsigrokdecode"
 
   def install
-    if File.exist?("autogen.sh") then
+    if !File.exist?("configure") && File.exist?("autogen.sh") then
       system "./autogen.sh"
     end
-    system "./configure", "--prefix=#{prefix}", "--disable-silent-rules", *std_configure_args
+    system "./configure", *std_configure_args, "--disable-silent-rules"
     system "make"
     system "make", "install"
   end
