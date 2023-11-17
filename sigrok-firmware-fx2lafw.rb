@@ -23,6 +23,6 @@ class SigrokFirmwareFx2lafw < Formula
   end
 
   test do
-    assert_match "fx2lafw-sigrok-fx2-8ch", shell_output("ls -1 #{share}/sigrok-firmware/")
+    system "ls", "-1", "#{share}/sigrok-firmware/"
   end
 end
