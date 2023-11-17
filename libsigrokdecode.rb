@@ -20,7 +20,7 @@ class Libsigrokdecode < Formula
     ENV["PYTHON3"] = Formula["python@3"].opt_bin/"python3"
 
     system "sed", "-i", "-e", "s/@SRD_PKGLIBS@/python3-embed/g", "libsigrokdecode.pc.in"
-    system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],//g', "configure.ac"
+    system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
     if build.head?
       system "./autogen.sh"
     else
@@ -28,7 +28,6 @@ class Libsigrokdecode < Formula
     end
     system "./configure", *std_configure_args, "--disable-silent-rules"
     system "make", "install"
-    # system "make", "install", "install-decoders"
   end
 
   test do
