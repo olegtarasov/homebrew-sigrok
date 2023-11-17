@@ -1,10 +1,9 @@
-# Based on rob-deutsch's branch
-# https://github.com/rob-deutsch/homebrew-core/tree/sigrok
 class Libsigrokdecode < Formula
-  desc "Shared library providing protocol decoding functionality"
+  desc "python library providing a lot of protocol decoders"
   homepage "https://sigrok.org/wiki/Libsigrokdecode"
   url "https://sigrok.org/download/source/libsigrokdecode/libsigrokdecode-0.5.3.tar.gz"
   sha256 "c50814aa6743cd8c4e88c84a0cdd8889d883c3be122289be90c63d7d67883fc0"
+  license "GPL-3.0-or-later"
   head "git://sigrok.org/libsigrokdecode"
 
   depends_on "automake" => :build
@@ -14,12 +13,9 @@ class Libsigrokdecode < Formula
   depends_on "make" => :build
   depends_on "pkg-config" => [:build, :test]
   depends_on "glib"
-  depends_on "python@3"
+  depends_on build.head? ? "python@3" : "python@3.8"
 
   def install
-    ENV["PYTHON3"] = Formula["python@3"].opt_bin/"python3"
-
-    system "sed", "-i", "-e", "s/@SRD_PKGLIBS@/python3-embed/g", "libsigrokdecode.pc.in"
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
     if build.head?
       system "./autogen.sh"
@@ -58,9 +54,8 @@ class Libsigrokdecode < Formula
         return 0;
       }
     EOS
-    pkg_config_flags = `pkg-config --cflags --libs glib-2.0`.chomp.split
-    system ENV.cc, "test.c", "-I#{include}", "-L#{lib}", "-lsigrokdecode",
-                   *pkg_config_flags, "-o", "test"
+    pkg_config_flags = `pkg-config --cflags --libs libsigrokdecode`.chomp.split
+    system ENV.cc, "test.c", *pkg_config_flags, "-o", "test"
     system "./test"
   end
 end
