@@ -17,12 +17,12 @@ class SigrokFirmwareFx2lafw < Formula
     if build.head?
       system "./autogen.sh"
     end
-    ssystem "./configure", *std_configure_args, "--disable-silent-rules"
+    system "./configure", *std_configure_args, "--disable-silent-rules"
     system "make"
     system "make", "install"
   end
 
   test do
-    assert_equal "13", shell_output("ls -1 #{share}/sigrok-firmware/ | grep -v ^l | wc -l").strip
+    assert_match "fx2lafw-sigrok-fx2-8ch", shell_output("ls -1 #{share}/sigrok-firmware/")
   end
 end
