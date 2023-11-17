@@ -3,6 +3,7 @@ class Pulseview < Formula
     homepage "https://sigrok.org/wiki/PulseView"
     url "https://sigrok.org/download/source/pulseview/pulseview-0.4.2.tar.gz"
     sha256 "f042f77a3e1b35bf30666330e36ec38fab8d248c3693c37b7e35d401c3bfabcb"
+    license "GPL-3.0-or-later"
     head "git://sigrok.org/pulseview"
   
     depends_on "qt"
@@ -17,12 +18,13 @@ class Pulseview < Formula
     depends_on "libserialport" => :build
     depends_on "hidapi" => :build
     depends_on "nettle" => :build
-    depends_on "takesako/sigrok/libsigrok"
+    depends_on "takesako/sigrok/libsigrok" => :build
     depends_on "takesako/sigrok/libsigrokdecode"
-  
+    depends_on "takesako/sigrok/sigrok-firmware-fx2lafw"
+
     def install
         mkdir "build" do
-            system "cmake", "..", "-DDISABLE_WERROR=y", *std_cmake_args
+            system "cmake", "..", *std_cmake_args, "-DDISABLE_WERROR=y"
             system "make"
             system "make", "install"
         end
