@@ -4,8 +4,8 @@ class Libsigrokdecode < Formula
   desc "Shared library providing protocol decoding functionality"
   homepage "https://sigrok.org/wiki/Libsigrokdecode"
   url "https://sigrok.org/download/source/libsigrokdecode/libsigrokdecode-0.5.3.tar.gz"
-  head "git://sigrok.org/libsigrokdecode"
   sha256 "c50814aa6743cd8c4e88c84a0cdd8889d883c3be122289be90c63d7d67883fc0"
+  head "git://sigrok.org/libsigrokdecode"
 
   # glib-2.0 >= 2.32.0
   depends_on "automake" => :build
@@ -22,9 +22,10 @@ class Libsigrokdecode < Formula
 
     system "sed", "-i", "-e", "s/@SRD_PKGLIBS@/python3-embed/g", "libsigrokdecode.pc.in"
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],//g', "configure.ac"
-    system "./autogen.sh"
-    system "./configure", "--disable-dependency-tracking",
-                          "--disable-silent-rules", "--prefix=#{prefix}"
+    if !File.exist?("configure") && File.exist?("autogen.sh") then
+      system "./autogen.sh"
+    end
+    system "./configure", , *std_configure_args, "--disable-silent-rules"
     system "make", "install"
     system "make", "install", "install-decoders"
   end
