@@ -7,7 +7,6 @@ class Libsigrokdecode < Formula
   sha256 "c50814aa6743cd8c4e88c84a0cdd8889d883c3be122289be90c63d7d67883fc0"
   head "git://sigrok.org/libsigrokdecode"
 
-  # glib-2.0 >= 2.32.0
   depends_on "automake" => :build
   depends_on "autoconf" => :build
   depends_on "libtool" => :build
@@ -22,12 +21,14 @@ class Libsigrokdecode < Formula
 
     system "sed", "-i", "-e", "s/@SRD_PKGLIBS@/python3-embed/g", "libsigrokdecode.pc.in"
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],//g', "configure.ac"
-    if !File.exist?("configure") && File.exist?("autogen.sh") then
+    if build.head?
       system "./autogen.sh"
+    else
+      system "autoreconf", "--force", "--install", "--verbose"
     end
     system "./configure", *std_configure_args, "--disable-silent-rules"
     system "make", "install"
-    system "make", "install", "install-decoders"
+    # system "make", "install", "install-decoders"
   end
 
   test do
