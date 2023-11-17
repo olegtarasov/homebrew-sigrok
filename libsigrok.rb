@@ -2,8 +2,7 @@ class Libsigrok < Formula
   desc "Drivers for logic analyzers and other supported devices"
   homepage "https://sigrok.org/"
   # libserialport is LGPL3+
-  # fw-fx2lafw is GPL-2.0-or-later and LGPL-2.1-or-later"
-  license all_of: ["GPL-3.0-or-later", "LGPL-3.0-or-later", "GPL-2.0-or-later", "LGPL-2.1-or-later"]
+  license all_of: ["GPL-3.0-or-later", "LGPL-3.0-or-later"]
   revision 2
 
   stable do
@@ -13,11 +12,6 @@ class Libsigrok < Formula
     resource "libserialport" do
       url "https://sigrok.org/download/source/libserialport/libserialport-0.1.1.tar.gz"
       sha256 "4a2af9d9c3ff488e92fb75b4ba38b35bcf9b8a66df04773eba2a7bbf1fa7529d"
-    end
-
-    resource "fw-fx2lafw" do
-      url "https://sigrok.org/download/source/sigrok-firmware-fx2lafw/sigrok-firmware-fx2lafw-0.1.7.tar.gz"
-      sha256 "a3f440d6a852a46e2c5d199fc1c8e4dacd006bc04e0d5576298ee55d056ace3b"
     end
   end
 
@@ -43,10 +37,6 @@ class Libsigrok < Formula
     resource "libserialport" do
       url "git://sigrok.org/libserialport", branch: "master"
     end
-
-    resource "fw-fx2lafw" do
-      url "git://sigrok.org/sigrok-firmware-fx2lafw", branch: "master"
-    end
   end
 
   depends_on "autoconf" => :build
@@ -69,29 +59,11 @@ class Libsigrok < Formula
   depends_on "pygobject3"
   depends_on "python@3.11"
 
-  resource "fw-fx2lafw" do
-    url "https://sigrok.org/download/binary/sigrok-firmware-fx2lafw/sigrok-firmware-fx2lafw-bin-0.1.7.tar.gz"
-    sha256 "c876fd075549e7783a6d5bfc8d99a695cfc583ddbcea0217d8e3f9351d1723af"
-  end
-
   def python3
     "python3.11"
   end
 
   def install
-    resource("fw-fx2lafw").stage do
-      if build.head?
-        system "./autogen.sh"
-      else
-        system "autoreconf", "--force", "--install", "--verbose"
-      end
-
-      mkdir "build" do
-        system "../configure", *std_configure_args
-        system "make", "install"
-      end
-    end
-
     resource("libserialport").stage do
       if build.head?
         system "./autogen.sh"
