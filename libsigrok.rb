@@ -3,6 +3,7 @@ class Libsigrok < Formula
   homepage "https://sigrok.org/"
   # libserialport is LGPL3+
   license all_of: ["GPL-3.0-or-later", "LGPL-3.0-or-later"]
+  revision 2
 
   stable do
     url "https://github.com/sigrokproject/libsigrok/archive/refs/tags/libsigrok-0.5.2.zip"
@@ -10,7 +11,7 @@ class Libsigrok < Formula
 
     resource "libserialport" do
       url "https://github.com/sigrokproject/libserialport/archive/refs/tags/libserialport-0.1.1.zip"
-      sha256 "4a2af9d9c3ff488e92fb75b4ba38b35bcf9b8a66df04773eba2a7bbf1fa7529d"
+      sha256 "4e3573e3bdbb6b0a872f32c4826d1b6b630dcc3eeb5f05d0501bb79d738a09ea"
     end
   end
 
@@ -88,7 +89,7 @@ class Libsigrok < Formula
       )
     end
 
-    if build.head?
+    if build.head? || !File.exist?("configure")
       system "./autogen.sh"
     else
       system "autoreconf", "--force", "--install", "--verbose"
