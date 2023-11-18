@@ -4,7 +4,8 @@ class SigrokFirmwareFx2lafw < Formula
   url "https://sigrok.org/download/source/sigrok-firmware-fx2lafw/sigrok-firmware-fx2lafw-0.1.7.tar.gz"
   sha256 "a3f440d6a852a46e2c5d199fc1c8e4dacd006bc04e0d5576298ee55d056ace3b"
   license all_of: ["GPL-2.0-or-later", "LGPL-2.1-or-later"]
-  head "git://sigrok.org/sigrok-firmware-fx2lafw"
+  head "https://github.com/sigrokproject/sigrok-firmware-fx2lafw.git"
+  # head "git://sigrok.org/sigrok-firmware-fx2lafw"
 
   depends_on "automake" => :build
   depends_on "autoconf" => :build
