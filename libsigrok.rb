@@ -32,10 +32,12 @@ class Libsigrok < Formula
   end
 
   head do
-    url "git://sigrok.org/libsigrok", branch: "master"
-
+    # url "git://sigrok.org/libsigrok", branch: "master"
+    url "https://github.com/sigrokproject/libsigrok.git", branch: "master"
+    
     resource "libserialport" do
-      url "git://sigrok.org/libserialport", branch: "master"
+      # url "git://sigrok.org/libserialport", branch: "master"
+      url "https://github.com/sigrokproject/libserialport.git", branch: "master"
     end
   end
 
