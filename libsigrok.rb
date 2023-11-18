@@ -3,7 +3,6 @@ class Libsigrok < Formula
   homepage "https://sigrok.org/"
   # libserialport is LGPL3+
   license all_of: ["GPL-3.0-or-later", "LGPL-3.0-or-later"]
-  revision 2
 
   stable do
     url "https://github.com/sigrokproject/libsigrok/archive/refs/tags/libsigrok-0.5.2.zip"
@@ -18,17 +17,6 @@ class Libsigrok < Formula
   livecheck do
     url "https://sigrok.org/wiki/Downloads"
     regex(/href=.*?libsigrok[._-]v?(\d+(?:\.\d+)+)\.t/i)
-  end
-
-  bottle do
-    rebuild 1
-    sha256 arm64_ventura:  "5cb796cad112521c090085f87cda4bafb9855e6c581ff2c04ad8fb41563b46a8"
-    sha256 arm64_monterey: "3f681eb6dd9e9de1062b048c29321600badf0665cb0a0436390dd33808820153"
-    sha256 arm64_big_sur:  "55ad23a50b5831d13e0138262166606c4c63419ae04ab3baa96b329a389ae5f1"
-    sha256 ventura:        "9f5afd85a8349cd773e36975ec1ca76d7081b62cbab0329095580dd2cdbb9fa1"
-    sha256 monterey:       "22b1440ef8e3ff0f8a402645a82240e108817be368a9eab22db5ea831c09aae9"
-    sha256 big_sur:        "15259f84462573558321e31f32c7260d5ab4fb7845706193c9c18036b4dea1f7"
-    sha256 x86_64_linux:   "7f959e18410ea27731bbbc844103f8354f03e8a0ae395b3c7aef9c9a0ffccd86"
   end
 
   head do
