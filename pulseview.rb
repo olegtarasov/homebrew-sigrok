@@ -2,7 +2,7 @@ class Pulseview < Formula
   desc "PulseView is a Qt based logic analyzer, oscilloscope and MSO GUI for sigrok."
   homepage "https://sigrok.org/wiki/PulseView"
   url "https://github.com/sigrokproject/pulseview/archive/refs/tags/pulseview-0.4.2.zip"
-  sha256 "f042f77a3e1b35bf30666330e36ec38fab8d248c3693c37b7e35d401c3bfabcb"
+  sha256 "3445900e49b69fe44c8bd797524b3ef7351fa5f283ca87fee1fcf52e3dda2c71"
   license "GPL-3.0-or-later"
   head "https://github.com/sigrokproject/pulseview.git"
   
