@@ -4,7 +4,8 @@ class SigrokCli < Formula
   url "https://sigrok.org/download/source/sigrok-cli/sigrok-cli-0.7.0.tar.gz"
   sha256 "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
   license "GPL-3.0-or-later"
-  head "git://sigrok.org/sigrok-cli"
+  head "https://github.com/sigrokproject/sigrok-cli.git"
+  # head "git://sigrok.org/sigrok-cli"
 
   depends_on "automake" => :build
   depends_on "autoconf" => :build
