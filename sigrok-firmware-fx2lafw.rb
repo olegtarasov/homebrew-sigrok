@@ -1,8 +1,8 @@
 class SigrokFirmwareFx2lafw < Formula
   desc "Open-source firmware for Cypress FX2 chips"
   homepage "https://sigrok.org/wiki/Fx2lafw"
-  url "https://github.com/sigrokproject/sigrok-firmware-fx2lafw/archive/refs/tags/sigrok-firmware-fx2lafw-0.1.7.tar.gz"
-  sha256 "a3f440d6a852a46e2c5d199fc1c8e4dacd006bc04e0d5576298ee55d056ace3b"
+  url "https://github.com/sigrokproject/sigrok-firmware-fx2lafw/archive/refs/tags/sigrok-firmware-fx2lafw-0.1.7.zip"
+  sha256 "b3d4d3100c3754e8599d77f6b93a80b4a20e027141b4fc7aa80769d31b8465c2"
   license all_of: ["GPL-2.0-or-later", "LGPL-2.1-or-later"]
   head "https://github.com/sigrokproject/sigrok-firmware-fx2lafw.git"
 
