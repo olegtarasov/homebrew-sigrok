@@ -5,12 +5,10 @@ class Libsigrok < Formula
   license all_of: ["GPL-3.0-or-later", "LGPL-3.0-or-later"]
 
   stable do
-    # url "https://sigrok.org/download/source/libsigrok/libsigrok-0.5.2.tar.gz"
     url "https://github.com/sigrokproject/libsigrok/archive/refs/tags/libsigrok-0.5.2.tar.gz"
     sha256 "4d341f90b6220d3e8cb251dacf726c41165285612248f2c52d15df4590a1ce3c"
 
     resource "libserialport" do
-      # url "https://sigrok.org/download/source/libserialport/libserialport-0.1.1.tar.gz"
       url "https://github.com/sigrokproject/libserialport/archive/refs/tags/libserialport-0.1.1.tar.gz"
       sha256 "4a2af9d9c3ff488e92fb75b4ba38b35bcf9b8a66df04773eba2a7bbf1fa7529d"
     end
@@ -33,11 +31,9 @@ class Libsigrok < Formula
   end
 
   head do
-    # url "git://sigrok.org/libsigrok", branch: "master"
     url "https://github.com/sigrokproject/libsigrok.git", branch: "master"
     
     resource "libserialport" do
-      # url "git://sigrok.org/libserialport", branch: "master"
       url "https://github.com/sigrokproject/libserialport.git", branch: "master"
     end
   end
