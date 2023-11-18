@@ -4,7 +4,8 @@ class Libsigrokdecode < Formula
   url "https://sigrok.org/download/source/libsigrokdecode/libsigrokdecode-0.5.3.tar.gz"
   sha256 "c50814aa6743cd8c4e88c84a0cdd8889d883c3be122289be90c63d7d67883fc0"
   license "GPL-3.0-or-later"
-  head "git://sigrok.org/libsigrokdecode"
+  head "https://github.com/sigrokproject/libsigrokdecode.git"
+  # head "git://sigrok.org/libsigrokdecode"
 
   depends_on "automake" => :build
   depends_on "autoconf" => :build
