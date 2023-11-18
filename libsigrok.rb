@@ -7,7 +7,7 @@ class Libsigrok < Formula
 
   stable do
     url "https://github.com/sigrokproject/libsigrok/archive/refs/tags/libsigrok-0.5.2.zip"
-    sha256 "4d341f90b6220d3e8cb251dacf726c41165285612248f2c52d15df4590a1ce3c"
+    sha256 "9f3d4ae6023787f3c00ccb2a81d9b124474fc57286ff91037d8a33e6124129f3"
 
     resource "libserialport" do
       url "https://github.com/sigrokproject/libserialport/archive/refs/tags/libserialport-0.1.1.zip"
