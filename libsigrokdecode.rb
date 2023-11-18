@@ -2,7 +2,7 @@ class Libsigrokdecode < Formula
   desc "python library providing a lot of protocol decoders"
   homepage "https://sigrok.org/wiki/Libsigrokdecode"
   url "https://github.com/sigrokproject/libsigrokdecode/archive/refs/tags/libsigrokdecode-0.5.3.zip"
-  sha256 "c50814aa6743cd8c4e88c84a0cdd8889d883c3be122289be90c63d7d67883fc0"
+  sha256 "e0a8042722c1a992c3d2e1c3827afa5e0f45c9e1af8ceec225af229758f6cef5"
   license "GPL-3.0-or-later"
   head "https://github.com/sigrokproject/libsigrokdecode.git"
 
