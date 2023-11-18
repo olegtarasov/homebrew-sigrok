@@ -14,8 +14,10 @@ class SigrokFirmwareFx2lafw < Formula
   def install
     system 'perl -i -pe "s/(\s__interrupt)\s+(\w+)/\1(\2)/" fx2lafw.c fx2lib/include/autovector.h fx2lib/lib/interrupts/*.c include/scope.inc'
     system 'perl -i -pe "s/(__sbit\s+__at)\s+(0x[a-fA-F\d]+\s*\+\s*\d)\s+/\1(\2) /" fx2lib/include/fx2regs.h'
-    if build.head?
+    if build.head? || !File.exist?("configure")
       system "./autogen.sh"
+    else
+      system "autoreconf", "--force", "--install", "--verbose"
     end
     system "./configure", *std_configure_args, "--disable-silent-rules"
     system "make"
