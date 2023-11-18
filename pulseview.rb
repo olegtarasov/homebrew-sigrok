@@ -4,7 +4,8 @@ class Pulseview < Formula
   url "https://sigrok.org/download/source/pulseview/pulseview-0.4.2.tar.gz"
   sha256 "f042f77a3e1b35bf30666330e36ec38fab8d248c3693c37b7e35d401c3bfabcb"
   license "GPL-3.0-or-later"
-  head "git://sigrok.org/pulseview"
+  head "https://github.com/sigrokproject/pulseview.git"
+  # head "git://sigrok.org/pulseview"
   
   depends_on "qt"
   depends_on "cmake" => :build
