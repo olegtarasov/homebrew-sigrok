@@ -18,7 +18,7 @@ class SigrokCli < Formula
   depends_on "takesako/sigrok/sigrok-firmware-fx2lafw"
 
   def install
-    if build.head? || !File.exit?("configure")
+    if build.head? || !File.exist?("configure")
       system "./autogen.sh"
     end
     system "./configure", *std_configure_args, "--disable-silent-rules"
