@@ -1,7 +1,7 @@
 class SigrokCli < Formula
   desc "Command-line frontend for sigrok"
   homepage "https://sigrok.org/wiki/Sigrok-cli"
-  url "https://sigrok.org/download/source/sigrok-cli/sigrok-cli-0.7.0.tar.gz"
+  url "https://github.com/sigrokproject/sigrok-cli/archive/refs/tags/sigrok-cli-0.7.2.zip"
   sha256 "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
   license "GPL-3.0-or-later"
   head "https://github.com/sigrokproject/sigrok-cli.git"
@@ -19,7 +19,7 @@ class SigrokCli < Formula
   depends_on "takesako/sigrok/sigrok-firmware-fx2lafw"
 
   def install
-    if build.head?
+    if build.head? || !File.exit?("configure")
       system "./autogen.sh"
     end
     system "./configure", *std_configure_args, "--disable-silent-rules"
