@@ -2,10 +2,9 @@ class SigrokCli < Formula
   desc "Command-line frontend for sigrok"
   homepage "https://sigrok.org/wiki/Sigrok-cli"
   url "https://github.com/sigrokproject/sigrok-cli/archive/refs/tags/sigrok-cli-0.7.2.zip"
-  sha256 "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
+  sha256 "5eda4c2fa0e80d52faef4c50bc4043936ba4aa164de03a831825f9a0516616a7"
   license "GPL-3.0-or-later"
   head "https://github.com/sigrokproject/sigrok-cli.git"
-  # head "git://sigrok.org/sigrok-cli"
 
   depends_on "automake" => :build
   depends_on "autoconf" => :build
