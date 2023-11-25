@@ -6,7 +6,7 @@ class Pulseview < Formula
   license "GPL-3.0-or-later"
   head "https://github.com/sigrokproject/pulseview.git"
   
-  depends_on "qt"
+  depends_on build.head? ? "qt" : "qt@5"
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
   depends_on "glib" => :build
