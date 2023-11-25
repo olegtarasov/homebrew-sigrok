@@ -30,8 +30,8 @@ class Pulseview < Formula
     mkdir "build" do
       system "cmake", "..", *std_cmake_args, "-DDISABLE_WERROR=y"
       if !build.head?
-        # system "sed", "-i", "-e", 's/CXX_FLAGS = /CXX_FLAGS=-D__GLIB_TYPEOF_H__ /g', "CMakeFiles/pulseview.dir/flags.make"
-        ENV.append_to_cflags "-D__GLIB_TYPEOF_H__"
+        # ENV.append_to_cflags "-D__GLIB_TYPEOF_H__"
+        system "sed", "-i", "-e", 's/CXX_FLAGS = /CXX_FLAGS=-D__GLIB_TYPEOF_H__ /g', "CMakeFiles/pulseview.dir/flags.make"
       end
       system "make"
       system "make", "install"
