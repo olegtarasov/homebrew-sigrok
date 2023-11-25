@@ -41,6 +41,7 @@ class Pulseview < Formula
   test do
     system "#{bin}/pulseview", "-V"
   end
+end
 
 __END__
 diff -ur pulseview-pulseview-0.4.2/pv/subwindows/decoder_selector/subwindow.cpp pulseview-pulseview-0.4.2-patch/pv/subwindows/decoder_selector/subwindow.cpp
