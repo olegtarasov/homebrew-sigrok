@@ -22,9 +22,16 @@ class Pulseview < Formula
   depends_on "takesako/sigrok/libsigrokdecode"
   depends_on "takesako/sigrok/sigrok-firmware-fx2lafw"
 
+  stable do
+    patch :p1 do
+      url "https://raw.githubusercontent.com/takesako/homebrew-sigrok/master/pulseview-0.4.2-qt5.patch"
+      sha256 "a53a26e9a003fff717ff9cbaae9e67e1b4acc6edb03bed3cc4ea6d9102f242e3"
+    end
+  end
+
   def install
     mkdir "build" do
-      system "cmake", "..", *std_cmake_args, "-DDISABLE_WERROR=y"
+      system "cmake", "..", *std_cmake_args, "-D__GLIB_TYPEOF_H__=", "-DDISABLE_WERROR=y"
       system "make"
       system "make", "install"
     end
