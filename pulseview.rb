@@ -6,7 +6,6 @@ class Pulseview < Formula
   license "GPL-3.0-or-later"
   head "https://github.com/sigrokproject/pulseview.git"
   
-  depends_on build.head? ? "qt" : "qt@5"
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
   depends_on "glib" => :build
@@ -22,14 +21,19 @@ class Pulseview < Formula
   depends_on "takesako/sigrok/libsigrokdecode"
   depends_on "takesako/sigrok/sigrok-firmware-fx2lafw"
 
+  head do
+    depends_on "qt"
+  end
+
   stable do
+    depends_on "qt@5"
     patch :p1, :DATA
   end
 
   def install
     mkdir "build" do
       system "cmake", "..", *std_cmake_args, "-DDISABLE_WERROR=y"
-      if !build.head?
+      if build.stable?
         # ENV.append_to_cflags "-D__GLIB_TYPEOF_H__"
         system "sed", "-i", "-e", 's/CXX_FLAGS = /CXX_FLAGS=-D__GLIB_TYPEOF_H__ /g', "CMakeFiles/pulseview.dir/flags.make"
       end
