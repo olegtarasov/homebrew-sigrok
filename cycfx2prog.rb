@@ -5,7 +5,7 @@ class Cycfx2prog < Formula
   sha256 "0e2669c11e81b271d26f96f252e936d81b4847dd5f47e50d17003c5330f74a36"
   license "GPL-2.0-only"
 
-  depends_on "libusb"
+  depends_on "libusb-compat"
 
   stable do
     patch :p1, :DATA
