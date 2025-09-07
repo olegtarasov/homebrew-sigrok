@@ -31,6 +31,15 @@ class Pulseview < Formula
   end
 
   def install
+    if build.head?
+      cmakelists = buildpath/"CMakeLists.txt"
+      if cmakelists.exist? && cmakelists.read.include?("set(BOOSTCOMPS filesystem serialization system)")
+        ohai "Patching BOOSTCOMPS in #{cmakelists}"
+        inreplace cmakelists,
+                  "set(BOOSTCOMPS filesystem serialization system)",
+                  "set(BOOSTCOMPS filesystem serialization)"
+      end
+    end
     mkdir "build" do
       system "cmake", "..", *std_cmake_args, "-DDISABLE_WERROR=y"
       if build.stable?
