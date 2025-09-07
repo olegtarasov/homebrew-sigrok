@@ -2,7 +2,7 @@ class Pulseview < Formula
   desc "PulseView is a Qt based logic analyzer, oscilloscope and MSO GUI for sigrok."
   homepage "https://sigrok.org/wiki/PulseView"
   url "https://github.com/sigrokproject/pulseview.git", branch: "master"
-  version :git
+  version "HEAD"
   license "GPL-3.0-or-later"
 
   depends_on "cmake" => :build
@@ -11,8 +11,8 @@ class Pulseview < Formula
   depends_on "libftdi" => :build
   depends_on "libusb" => :build
   depends_on "libzip" => :build
-  depends_on "glibmm" => :build
-  depends_on "libsigc++" => :build
+  depends_on "glibmm@2.66" => :build
+  depends_on "libsigc++@2" => :build
   depends_on "libserialport" => :build
   depends_on "hidapi" => :build
   depends_on "nettle" => :build

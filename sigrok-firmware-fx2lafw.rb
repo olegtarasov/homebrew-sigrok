@@ -2,7 +2,7 @@ class SigrokFirmwareFx2lafw < Formula
   desc "Open-source firmware for Cypress FX2 chips"
   homepage "https://sigrok.org/wiki/Fx2lafw"
   url "https://github.com/sigrokproject/sigrok-firmware-fx2lafw.git", branch: "master"
-  version :git
+  version "HEAD"
   license all_of: ["GPL-2.0-or-later", "LGPL-2.1-or-later"]
 
   depends_on "automake" => :build
