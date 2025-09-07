@@ -21,33 +21,34 @@ class Libsigrokdecode < Formula
   depends_on "python@3"
 
   def install
-    # Add custom decoders alongside the existing ones (do not replace).
+    # Single-pass: merge custom decoder directories into the source 'decoders'
+    # tree so the project's installer picks them up. On name collisions, the
+    # custom decoder overrides the bundled one.
     resource("sigrok-decoders").stage do
       require "fileutils"
+      staged_root = Pathname.pwd
       decoders_dir = buildpath/"decoders"
-      ohai "Merging custom decoders into #{decoders_dir}"
       decoders_dir.mkpath
-      existing = decoders_dir.exist? ? Dir.children(decoders_dir) : []
-      ohai "Existing decoders count: #{existing.length}"
-      staged = Dir.children(".")
-      ohai "Custom decoders staged count: #{staged.length}"
-      Dir.children(".").each do |entry|
-        src = Pathname.pwd/entry
-        dst = decoders_dir/entry
+
+      dir_entries = Dir.children(staged_root).select { |e| (staged_root/e).directory? }
+      ohai "Merging custom decoders into #{decoders_dir}"
+      ohai "Existing decoders count: #{decoders_dir.directory? ? Dir.children(decoders_dir).length : 0}"
+      ohai "Custom decoder directories staged: #{dir_entries.length}"
+
+      dir_entries.each do |d|
+        src = staged_root/d
+        dst = decoders_dir/d
         if dst.exist?
-          ohai "Overriding existing decoder: #{entry}"
+          ohai "Overriding decoder: #{d}"
           FileUtils.rm_rf(dst)
         else
-          ohai "Adding new decoder: #{entry}"
+          ohai "Adding decoder: #{d}"
         end
-        if src.directory?
-          FileUtils.cp_r src, decoders_dir
-        else
-          FileUtils.cp src, decoders_dir
-        end
+        FileUtils.cp_r src, decoders_dir
       end
+
       final = Dir.children(decoders_dir)
-      ohai "Final decoders count: #{final.length}"
+      ohai "Final decoder directories in source: #{final.length}"
     end
 
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
