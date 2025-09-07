@@ -6,6 +6,6 @@ Stable versions with patches were dropped.
 ## Install
 
 ```
-brew install olegtarasov/sigrok/pulseview
-brew install olegtarasov/sigrok/sigrok-cli
+brew install --HEAD olegtarasov/sigrok/pulseview
+brew install --HEAD olegtarasov/sigrok/sigrok-cli
 ```
