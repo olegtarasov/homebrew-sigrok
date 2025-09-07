@@ -81,6 +81,11 @@ class Libsigrok < Formula
       system "make"
       system "make", "install"
     end
+
+    # Ensure Homebrew detects a non-empty installation even if files were overwritten
+    # into an existing keg path during head-style rebuilds.
+    stamp = prefix/".tap_head_build_stamp"
+    stamp.atomic_write("built: #{Time.now.utc}\n")
   end
 
   test do
