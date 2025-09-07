@@ -17,9 +17,9 @@ class Pulseview < Formula
   depends_on "libserialport" => :build
   depends_on "hidapi" => :build
   depends_on "nettle" => :build
-  depends_on "takesako/sigrok/libsigrok"
-  depends_on "takesako/sigrok/libsigrokdecode"
-  depends_on "takesako/sigrok/sigrok-firmware-fx2lafw"
+  depends_on "olegtarasov/sigrok/libsigrok"
+  depends_on "olegtarasov/sigrok/libsigrokdecode"
+  depends_on "olegtarasov/sigrok/sigrok-firmware-fx2lafw"
 
   head do
     depends_on "qt"
