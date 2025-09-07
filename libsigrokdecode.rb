@@ -39,15 +39,27 @@ class Libsigrokdecode < Formula
       ohai "Existing decoders count: #{decoders_dir.directory? ? Dir.children(decoders_dir).length : 0}"
       ohai "Custom decoder directories staged: #{dir_entries.length}"
 
-      dir_entries.each do |d|
-        src = staged_root/d
-        dst = decoders_dir/d
-        if dst.exist?
-          ohai "Overriding decoder: #{d}"
-          FileUtils.rm_rf(dst)
-        else
-          ohai "Adding decoder: #{d}"
+      if dir_entries.any?
+        dir_entries.each do |d|
+          src = staged_root/d
+          dst = decoders_dir/d
+          if dst.exist?
+            ohai "Overriding decoder: #{d}"
+            FileUtils.rm_rf(dst)
+          else
+            ohai "Adding decoder: #{d}"
+          end
+          FileUtils.cp_r src, decoders_dir
         end
+      else
+        # Homebrew may stage a git resource into a single top-level directory
+        # and cd into it. In that case, treat the staged root itself as one
+        # decoder directory and copy it.
+        decoder_name = File.basename(staged_root)
+        ohai "No subdirectories found; treating staged root as decoder: #{decoder_name}"
+        src = staged_root
+        dst = decoders_dir/decoder_name
+        FileUtils.rm_rf(dst) if dst.exist?
         FileUtils.cp_r src, decoders_dir
       end
 
