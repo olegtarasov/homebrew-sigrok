@@ -4,9 +4,8 @@ class Libsigrok < Formula
   # libserialport is LGPL3+
   license all_of: ["GPL-3.0-or-later", "LGPL-3.0-or-later"]
 
-  # Default to building from the latest source.
-  url "https://github.com/sigrokproject/libsigrok.git", branch: "master"
-  version "HEAD-20250907"
+  # Head-only: always build latest source by default.
+  head "https://github.com/sigrokproject/libsigrok.git", branch: "master"
 
   resource "libserialport" do
     url "https://github.com/sigrokproject/libserialport.git", branch: "master"
