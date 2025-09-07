@@ -30,41 +30,21 @@ class Libsigrokdecode < Formula
       decoders_dir = buildpath/"decoders"
       decoders_dir.mkpath
 
-      ohai "Resource staged at: #{staged_root}"
-      all_entries = Dir.entries('.') - ['.', '..']
-      ohai "Staged entries: #{all_entries.sort.join(' ')}"
       dir_entries = Dir.glob('*').select { |e| File.directory?(e) }
-
-      ohai "Merging custom decoders into #{decoders_dir}"
-      ohai "Existing decoders count: #{decoders_dir.directory? ? Dir.children(decoders_dir).length : 0}"
-      ohai "Custom decoder directories staged: #{dir_entries.length}"
-
       if dir_entries.any?
         dir_entries.each do |d|
           src = staged_root/d
           dst = decoders_dir/d
-          if dst.exist?
-            ohai "Overriding decoder: #{d}"
-            FileUtils.rm_rf(dst)
-          else
-            ohai "Adding decoder: #{d}"
-          end
+          FileUtils.rm_rf(dst) if dst.exist?
           FileUtils.cp_r src, decoders_dir
         end
       else
-        # Homebrew may stage a git resource into a single top-level directory
-        # and cd into it. In that case, treat the staged root itself as one
-        # decoder directory and copy it.
-        decoder_name = File.basename(staged_root)
-        ohai "No subdirectories found; treating staged root as decoder: #{decoder_name}"
+        # If staged into a single decoder directory, copy that directory.
         src = staged_root
-        dst = decoders_dir/decoder_name
+        dst = decoders_dir/File.basename(staged_root)
         FileUtils.rm_rf(dst) if dst.exist?
         FileUtils.cp_r src, decoders_dir
       end
-
-      final = Dir.children(decoders_dir)
-      ohai "Final decoder directories in source: #{final.length}"
     end
 
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
