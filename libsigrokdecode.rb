@@ -1,10 +1,8 @@
 class Libsigrokdecode < Formula
   desc "python library providing a lot of protocol decoders"
   homepage "https://sigrok.org/wiki/Libsigrokdecode"
-  url "https://github.com/sigrokproject/libsigrokdecode/archive/refs/tags/libsigrokdecode-0.5.3.zip"
-  sha256 "e0a8042722c1a992c3d2e1c3827afa5e0f45c9e1af8ceec225af229758f6cef5"
+  url "https://github.com/sigrokproject/libsigrokdecode.git", branch: "master"
   license "GPL-3.0-or-later"
-  head "https://github.com/sigrokproject/libsigrokdecode.git"
 
   depends_on "automake" => :build
   depends_on "autoconf" => :build
@@ -13,11 +11,11 @@ class Libsigrokdecode < Formula
   depends_on "make" => :build
   depends_on "pkg-config" => [:build, :test]
   depends_on "glib"
-  depends_on "python@3.11"
+  depends_on "python@3"
 
   def install
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
-    if build.head? || !File.exist?("configure")
+    if !File.exist?("configure")
       system "./autogen.sh"
     else
       system "autoreconf", "--force", "--install", "--verbose"

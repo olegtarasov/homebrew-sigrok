@@ -4,27 +4,11 @@ class Libsigrok < Formula
   # libserialport is LGPL3+
   license all_of: ["GPL-3.0-or-later", "LGPL-3.0-or-later"]
 
-  stable do
-    url "https://github.com/sigrokproject/libsigrok/archive/refs/tags/libsigrok-0.5.2.zip"
-    sha256 "9f3d4ae6023787f3c00ccb2a81d9b124474fc57286ff91037d8a33e6124129f3"
+  # Default to building from the latest source.
+  url "https://github.com/sigrokproject/libsigrok.git", branch: "master"
 
-    resource "libserialport" do
-      url "https://github.com/sigrokproject/libserialport/archive/refs/tags/libserialport-0.1.1.zip"
-      sha256 "e25b278676cfd6819d7e323af4caad2e38c30bc4352b6fa27496b251c351aba1"
-    end
-  end
-
-  livecheck do
-    url "https://sigrok.org/wiki/Downloads"
-    regex(/href=.*?libsigrok[._-]v?(\d+(?:\.\d+)+)\.t/i)
-  end
-
-  head do
-    url "https://github.com/sigrokproject/libsigrok.git", branch: "master"
-    
-    resource "libserialport" do
-      url "https://github.com/sigrokproject/libserialport.git", branch: "master"
-    end
+  resource "libserialport" do
+    url "https://github.com/sigrokproject/libserialport.git", branch: "master"
   end
 
   depends_on "autoconf" => :build
@@ -37,7 +21,7 @@ class Libsigrok < Formula
   depends_on "sdcc" => :build
   depends_on "swig" => :build
   depends_on "glib"
-  depends_on "glibmm@2.66"
+  depends_on "glibmm"
   depends_on "hidapi"
   depends_on "libftdi"
   depends_on "libusb"
@@ -45,15 +29,11 @@ class Libsigrok < Formula
   depends_on "nettle"
   depends_on "numpy"
   depends_on "pygobject3"
-  depends_on "python@3.11"
-
-  def python3
-    "python3.11"
-  end
+  depends_on "python@3"
 
   def install
     resource("libserialport").stage do
-      if build.head? || !File.exist?("configure")
+      if !File.exist?("configure")
         system "./autogen.sh"
       else
         system "autoreconf", "--force", "--install", "--verbose"
@@ -77,7 +57,7 @@ class Libsigrok < Formula
       )
     end
 
-    if build.head? || !File.exist?("configure")
+    if !File.exist?("configure")
       system "./autogen.sh"
     else
       system "autoreconf", "--force", "--install", "--verbose"
