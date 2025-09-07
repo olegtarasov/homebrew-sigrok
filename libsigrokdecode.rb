@@ -5,6 +5,12 @@ class Libsigrokdecode < Formula
   head "https://github.com/sigrokproject/libsigrokdecode.git", branch: "master"
   license "GPL-3.0-or-later"
 
+  # Use decoders from the external repository by vendoring them into the
+  # libsigrokdecode source tree under the `decoders` directory before build.
+  resource "sigrok-decoders" do
+    url "https://github.com/olegtarasov/sigrok-decoders.git"
+  end
+
   depends_on "automake" => :build
   depends_on "autoconf" => :build
   depends_on "libtool" => :build
@@ -15,6 +21,23 @@ class Libsigrokdecode < Formula
   depends_on "python@3"
 
   def install
+    # Add custom decoders alongside the existing ones (do not replace).
+    resource("sigrok-decoders").stage do
+      require "fileutils"
+      decoders_dir = buildpath/"decoders"
+      decoders_dir.mkpath
+      Dir.children(".").each do |entry|
+        src = Pathname.pwd/entry
+        dst = decoders_dir/entry
+        FileUtils.rm_rf(dst) if dst.exist? # override existing decoder if collides
+        if src.directory?
+          FileUtils.cp_r src, decoders_dir
+        else
+          FileUtils.cp src, decoders_dir
+        end
+      end
+    end
+
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
     if !File.exist?("configure")
       system "./autogen.sh"
