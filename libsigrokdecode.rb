@@ -13,14 +13,7 @@ class Libsigrokdecode < Formula
   depends_on "make" => :build
   depends_on "pkg-config" => [:build, :test]
   depends_on "glib"
-
-  head do
-    depends_on "python@3"
-  end
-
-  stable do
-    depends_on "python@3.8"
-  end
+  depends_on "python@3.11"
 
   def install
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
