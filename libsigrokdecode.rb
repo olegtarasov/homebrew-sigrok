@@ -8,7 +8,7 @@ class Libsigrokdecode < Formula
   # Use decoders from the external repository by vendoring them into the
   # libsigrokdecode source tree under the `decoders` directory before build.
   resource "sigrok-decoders" do
-    url "https://github.com/olegtarasov/sigrok-decoders.git"
+    url "https://github.com/olegtarasov/sigrok-decoders.git", using: :git
   end
 
   depends_on "automake" => :build
@@ -25,17 +25,29 @@ class Libsigrokdecode < Formula
     resource("sigrok-decoders").stage do
       require "fileutils"
       decoders_dir = buildpath/"decoders"
+      ohai "Merging custom decoders into #{decoders_dir}"
       decoders_dir.mkpath
+      existing = decoders_dir.exist? ? Dir.children(decoders_dir) : []
+      ohai "Existing decoders count: #{existing.length}"
+      staged = Dir.children(".")
+      ohai "Custom decoders staged count: #{staged.length}"
       Dir.children(".").each do |entry|
         src = Pathname.pwd/entry
         dst = decoders_dir/entry
-        FileUtils.rm_rf(dst) if dst.exist? # override existing decoder if collides
+        if dst.exist?
+          ohai "Overriding existing decoder: #{entry}"
+          FileUtils.rm_rf(dst)
+        else
+          ohai "Adding new decoder: #{entry}"
+        end
         if src.directory?
           FileUtils.cp_r src, decoders_dir
         else
           FileUtils.cp src, decoders_dir
         end
       end
+      final = Dir.children(decoders_dir)
+      ohai "Final decoders count: #{final.length}"
     end
 
     system "sed", "-i", "-e", 's/\[python-3\.[0-9]+-embed\],/[python3-embed],/g', "configure.ac"
