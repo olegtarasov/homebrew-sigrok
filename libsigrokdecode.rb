@@ -30,7 +30,11 @@ class Libsigrokdecode < Formula
       decoders_dir = buildpath/"decoders"
       decoders_dir.mkpath
 
-      dir_entries = Dir.children(staged_root).select { |e| (staged_root/e).directory? }
+      ohai "Resource staged at: #{staged_root}"
+      all_entries = Dir.entries('.') - ['.', '..']
+      ohai "Staged entries: #{all_entries.sort.join(' ')}"
+      dir_entries = Dir.glob('*').select { |e| File.directory?(e) }
+
       ohai "Merging custom decoders into #{decoders_dir}"
       ohai "Existing decoders count: #{decoders_dir.directory? ? Dir.children(decoders_dir).length : 0}"
       ohai "Custom decoder directories staged: #{dir_entries.length}"
