@@ -32,6 +32,10 @@ class Libsigrok < Formula
   depends_on "pygobject3"
   depends_on "python@3"
 
+  def python3
+    "python3"
+  end
+
   def install
     resource("libserialport").stage do
       if !File.exist?("configure")
