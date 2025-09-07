@@ -6,7 +6,7 @@ class Libsigrok < Formula
 
   # Default to building from the latest source.
   url "https://github.com/sigrokproject/libsigrok.git", branch: "master"
-  version "HEAD"
+  version "HEAD-20250907"
 
   resource "libserialport" do
     url "https://github.com/sigrokproject/libserialport.git", branch: "master"

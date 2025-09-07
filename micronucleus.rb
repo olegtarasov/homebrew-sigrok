@@ -2,7 +2,7 @@ class Micronucleus < Formula
   desc "ATTiny usb bootloader with a strong emphasis on bootloader compactness."
   homepage "https://github.com/micronucleus"
   url "https://github.com/micronucleus/micronucleus.git", branch: "master"
-  version "HEAD"
+  version "HEAD-20250907"
   license "GPL-2.0-or-later"
 
   depends_on "libusb-compat"

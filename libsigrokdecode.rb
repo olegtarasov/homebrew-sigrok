@@ -2,7 +2,7 @@ class Libsigrokdecode < Formula
   desc "python library providing a lot of protocol decoders"
   homepage "https://sigrok.org/wiki/Libsigrokdecode"
   url "https://github.com/sigrokproject/libsigrokdecode.git", branch: "master"
-  version "HEAD"
+  version "HEAD-20250907"
   license "GPL-3.0-or-later"
 
   depends_on "automake" => :build
