@@ -22,7 +22,7 @@ class Libsigrok < Formula
   depends_on "sdcc" => :build
   depends_on "swig" => :build
   depends_on "glib"
-  depends_on "glibmm"
+  depends_on "glibmm@2.66"
   depends_on "hidapi"
   depends_on "libftdi"
   depends_on "libusb"
