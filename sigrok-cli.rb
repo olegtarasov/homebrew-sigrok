@@ -2,6 +2,7 @@ class SigrokCli < Formula
   desc "Command-line frontend for sigrok"
   homepage "https://sigrok.org/wiki/Sigrok-cli"
   url "https://github.com/sigrokproject/sigrok-cli.git", branch: "master"
+  version "HEAD"
   license "GPL-3.0-or-later"
 
   depends_on "automake" => :build
